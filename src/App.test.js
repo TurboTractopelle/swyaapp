@@ -1,9 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import App from "./App";
+import { shallow } from "enzyme";
+import { findByTestAttribute } from "../utils/testingUtils";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+let wrapper;
+const setup = props => shallow(<App {...props} />);
+
+describe("App", () => {
+	beforeAll(() => {
+		wrapper = setup();
+	});
+	it("displays the <App />", () => {
+		const app = findByTestAttribute(wrapper, "App");
+		expect(app).toHaveLength(1);
+	});
 });
