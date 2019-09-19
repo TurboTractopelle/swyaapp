@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.scss";
-import A from "./components/A/A";
 import B from "./components/B/B";
 import Form from "./containers/Form";
+import Auth from "./containers/Auth/Auth";
 import { Route, Switch, NavLink } from "react-router-dom";
 
 function App() {
@@ -10,20 +10,21 @@ function App() {
 		<div className="App" data-test="App">
 			<nav>
 				<NavLink to="/" exact>
-					Form
+					Login/register
 				</NavLink>
-				<NavLink to="/a" exact>
-					A
+				<NavLink to="/account" exact>
+					My account
 				</NavLink>
 				<NavLink to="/b" exact>
-					B
+					Dossier
 				</NavLink>
+				<button>logout</button>
 			</nav>
 			<main>
 				<Switch>
-					<Route exact path="/" component={Form} />
-					<Route exact path="/a" component={A} />
-					<Route exact path="/b" component={B} />
+					<Route exact path="/" component={Auth} />
+					<Route exact path="/account" component={Form} />
+					<Route exact path="/dossier" component={B} />
 				</Switch>
 			</main>
 		</div>

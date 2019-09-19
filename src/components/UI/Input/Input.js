@@ -1,5 +1,5 @@
 import React from "react";
-import SelectCountry from "../SelectCountry/SelectCountry";
+import SelectCountry from "../../SelectCountry/SelectCountry";
 
 const Input = props => {
 	const required = props.data.validation.required && <span className="required">*</span>;

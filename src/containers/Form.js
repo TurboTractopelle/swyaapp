@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Input from "../components/Input/Input";
-import Submitbtn from "../components/Submibtn/Submitbtn";
+import Input from "../components/UI/Input/Input";
+import Submitbtn from "../components/UI/Button/Button";
 import "./Form.scss";
 
 class Form extends Component {
