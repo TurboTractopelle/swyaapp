@@ -8,7 +8,7 @@ export default function Message(props) {
 				className={[classes.span, classes[props.cat ? props.cat : ""]].join(" ")}
 				data-test="icon"
 			></span>{" "}
-			<div data-test="msg">{props.txt}</div>
+			<div data-test="msg">{props.body}</div>
 		</div>
 	);
 }

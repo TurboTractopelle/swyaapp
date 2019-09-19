@@ -7,6 +7,7 @@ import { Route, Switch, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import Spinner from "./components/UI/Spinner/Spinner";
+import Message from "./components/UI/Message/Message";
 
 export class App extends Component {
 	componentDidMount() {
@@ -17,6 +18,8 @@ export class App extends Component {
 		let routes;
 
 		const loading = this.props.loading && <Spinner />;
+
+		const error = this.props.error && <Message cat="error" body={this.props.error.body} />;
 
 		if (this.props.isAuthenticated) {
 			routes = (
@@ -45,6 +48,7 @@ export class App extends Component {
 				<nav>{routes}</nav>
 				<main>
 					{loading}
+					{error}
 					<Switch>
 						<Route exact path="/" component={Auth} />
 						<Route exact path="/account" component={Form} />
@@ -59,7 +63,8 @@ export class App extends Component {
 const mapStateToProps = state => {
 	return {
 		isAuthenticated: state.auth.token !== null,
-		loading: state.auth.loading
+		loading: state.auth.loading,
+		error: state.auth.error
 	};
 };
 

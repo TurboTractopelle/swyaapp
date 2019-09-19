@@ -1,14 +1,14 @@
 import React from "react";
 import Message from "./Message";
 import { shallow } from "enzyme";
-import { findByTestAttribute } from "../../../utils/testingUtils";
+import { findByTestAttribute } from "../../../../utils/testingUtils";
 
 let wrapper;
 const setup = (props = {}) => shallow(<Message {...props} />);
 
 describe("Message", () => {
 	beforeAll(() => {
-		wrapper = setup({ cat: "error", txt: "error msg" });
+		wrapper = setup({ cat: "error", body: "error msg" });
 	});
 
 	it("use the correct class", () => {
