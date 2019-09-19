@@ -1,18 +1,11 @@
 import * as actionTypes from "./actionTypes";
+import actionCreator from "./actionCreator";
 import axios from "axios";
 
-const actionCreactor = (type, ...autreArgs) => {
-	return (...arg) => {
-		const action = { type };
-		autreArgs.map((item, i) => (action[item] = arg[i]));
-		return action;
-	};
-};
-
-export const authStart = actionCreactor(actionTypes.AUTH_START);
-export const authSuccess = actionCreactor(actionTypes.AUTH_SUCCESS, "idToken", "userId");
-export const authFail = actionCreactor(actionTypes.AUTH_FAIL, "error");
-export const authStop = actionCreactor(actionTypes.AUTH_STOP);
+export const authStart = actionCreator(actionTypes.AUTH_START);
+export const authSuccess = actionCreator(actionTypes.AUTH_SUCCESS, "idToken", "userId");
+export const authFail = actionCreator(actionTypes.AUTH_FAIL, "error");
+export const authStop = actionCreator(actionTypes.AUTH_STOP);
 
 export const checkAuthTimeout = expirationTime => {
 	return dispatch => {
@@ -50,7 +43,7 @@ export const auth = (email, password, isSignUp) => {
 	};
 };
 
-export const setAuthRedirectPath = actionCreactor(actionTypes.SET_AUTH_REDIRECT_PATH, "path");
+export const setAuthRedirectPath = actionCreator(actionTypes.SET_AUTH_REDIRECT_PATH, "path");
 
 export const logout = () => {
 	//remove from local store
