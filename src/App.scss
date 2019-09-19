@@ -1,18 +1,36 @@
 @import "./assets/colors.scss";
 
 .App {
-	text-align: center;
-	background: #282c34;
+	background: #e6e6e6;
 	min-height: 100vh;
 	color: #eee;
+	padding: 1rem;
 }
 
-.App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 40vmin;
-	pointer-events: none;
+nav {
+	background-color: #333;
+	display: flex;
+	a {
+		background: #a20015;
+		color: #fff;
+		flex: 1;
+		text-align: center;
+		text-decoration: none;
+		transition: all ease 500ms;
+		padding: 0.5rem;
+
+		&:hover {
+			background: #333;
+		}
+
+		&.active {
+			background-color: #000;
+		}
+	}
 }
 
-.App-link {
-	color: #61dafb;
+main {
+	background: #fff;
+	min-height: 50vh;
+	padding: 1rem;
 }
