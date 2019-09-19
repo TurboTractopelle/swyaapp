@@ -6,14 +6,17 @@ import Auth from "./containers/Auth/Auth";
 import { Route, Switch, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
+import Spinner from "./components/UI/Spinner/Spinner";
 
-class App extends Component {
+export class App extends Component {
 	componentDidMount() {
 		this.props.authCheckState();
 	}
 
 	render() {
 		let routes;
+
+		const loading = this.props.loading && <Spinner />;
 
 		if (this.props.isAuthenticated) {
 			routes = (
@@ -41,6 +44,7 @@ class App extends Component {
 			<div className="App" data-test="App">
 				<nav>{routes}</nav>
 				<main>
+					{loading}
 					<Switch>
 						<Route exact path="/" component={Auth} />
 						<Route exact path="/account" component={Form} />
@@ -54,7 +58,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
 	return {
-		isAuthenticated: state.auth.token !== null
+		isAuthenticated: state.auth.token !== null,
+		loading: state.auth.loading
 	};
 };
 
