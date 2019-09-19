@@ -1,0 +1,40 @@
+form {
+	border: solid 1px #ccc;
+	padding: 1rem;
+}
+form .item {
+	display: flex;
+	padding: 0.5rem;
+}
+
+form .item label {
+	min-width: 200px;
+}
+form .item input {
+	min-width: 200px;
+}
+form .item textarea {
+	min-width: 350px;
+	min-height: 150px;
+}
+form .item select {
+	min-width: 350px;
+}
+
+.required {
+	color: red;
+}
+
+.valid input,
+.valid textarea {
+	border: solid 1px green;
+}
+
+.notValid input,
+.notValid textarea {
+	border: solid 1px red;
+}
+
+form .item.Message.notValid .counter {
+	color: red;
+}

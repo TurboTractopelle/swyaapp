@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "../components/Input/Input";
 import Submitbtn from "../components/Submibtn/Submitbtn";
+import "./Form.scss";
 
 class Form extends Component {
 	state = {
