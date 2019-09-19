@@ -13,12 +13,11 @@ class App extends Component {
 	}
 
 	render() {
-		return (
-			<div className="App" data-test="App">
-				<nav>
-					<NavLink to="/" exact>
-						Login/register
-					</NavLink>
+		let routes;
+
+		if (this.props.isAuthenticated) {
+			routes = (
+				<Switch>
 					<NavLink to="/account" exact>
 						My account
 					</NavLink>
@@ -26,7 +25,21 @@ class App extends Component {
 						Dossier
 					</NavLink>
 					<button>logout</button>
-				</nav>
+				</Switch>
+			);
+		} else {
+			routes = (
+				<Switch>
+					<NavLink to="/" exact>
+						Login/register
+					</NavLink>
+				</Switch>
+			);
+		}
+
+		return (
+			<div className="App" data-test="App">
+				<nav>{routes}</nav>
 				<main>
 					<Switch>
 						<Route exact path="/" component={Auth} />
