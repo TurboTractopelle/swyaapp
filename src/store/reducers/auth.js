@@ -31,7 +31,7 @@ const auth = (state = initialState, action) => {
 			return { ...state, token: null, userId: null };
 
 		case actionTypes.SET_AUTH_REDIRECT_PATH:
-			return { ...state, authRedirectPath: "/b" };
+			return { ...state, authRedirectPath: "/dossier" };
 
 		default:
 			return state;
