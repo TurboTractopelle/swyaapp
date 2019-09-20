@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Button from "../../components/UI/Button/Button";
-import Input from "../../components/UI/Input/Input";
 import * as actions from "../../store/actions/auth";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import generateInputs from "../../utils/generateInputs";
+import checkFormValidation from "../../utils/checkFormValidation";
 
 class Auth extends Component {
 	state = {
@@ -47,6 +47,9 @@ class Auth extends Component {
 	inputChangeHandler = id => e => {
 		const value = e.target.value;
 
+		const inputValidationStatus = this.inputValidation(id, value);
+		const checkedFormValidation = checkFormValidation(this.state.form, id, inputValidationStatus);
+
 		this.setState(prevState => {
 			return {
 				...prevState,
@@ -57,41 +60,35 @@ class Auth extends Component {
 						validation: {
 							...prevState.form[id].validation,
 							touched: true,
-							valid: this.checkValidity(value, prevState.form[id].validation)
+							valid: this.inputValidation(id, value)
 						},
 						value
 					}
 				},
-				formIsValid: this.checkFormValidity(prevState.form)
+				formValidation: {
+					valid: checkedFormValidation(prevState.form, id, inputValidationStatus)
+				}
 			};
 		});
 	};
 
-	checkValidity = (value, rules) => {
+	inputValidation = (name, newValue) => {
+		const { validation } = this.state.form[name];
+
 		let isValid = true;
 
-		if (rules.required) {
-			isValid = value.trim() !== "" && isValid;
+		if (validation.required) {
+			isValid = newValue.trim() !== "" && isValid;
 		}
 
-		if (rules.minLength) {
-			isValid = value.length >= rules.minLength && isValid;
+		if (validation.minLength) {
+			isValid = newValue.length >= validation.minLength && isValid;
 		}
-		if (rules.maxLength) {
-			isValid = value.length <= rules.maxLength && isValid;
+		if (validation.maxLength) {
+			isValid = newValue.length <= validation.maxLength && isValid;
 		}
 
 		return isValid;
-	};
-
-	checkFormValidity = orderForm => {
-		// TODO refaire ici le test de validation pour avoir la dernière valeur de la validité de l id
-		let formIsValidArr = [];
-
-		for (let data in orderForm) {
-			formIsValidArr.push(orderForm[data].validation.valid);
-		}
-		return !formIsValidArr.some(e => e === false);
 	};
 
 	submitHandler = e => {

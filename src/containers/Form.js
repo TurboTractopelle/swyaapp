@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import generateInputs from "../utils/generateInputs";
+import checkFormValidation from "../utils/checkFormValidation";
 import Button from "../components/UI/Button/Button";
 import "./Form.scss";
 
@@ -118,20 +119,10 @@ class Form extends Component {
 		return out;
 	};
 
-	checkFormValidation = (name, status) => {
-		return Object.keys(this.state.form).reduce((a, k) => {
-			let inputValidation = this.state.form[k].validation.valid;
-			if (k === name) {
-				inputValidation = status;
-			}
-			return (a = a && inputValidation);
-		}, true);
-	};
-
 	onChangeHandler = name => e => {
 		const newValue = e.target.value;
 		const inputValidationStatus = this.inputValidation(name, newValue);
-		const checkFormValidation = this.checkFormValidation(name, inputValidationStatus);
+		const checkedFormValidation = checkFormValidation(this.state.form, name, inputValidationStatus);
 
 		this.setState(prevState => {
 			let nameValidation;
@@ -156,7 +147,7 @@ class Form extends Component {
 				},
 				formValidation: {
 					...prevState.formValidation,
-					valid: checkFormValidation
+					valid: checkedFormValidation
 				}
 			};
 		});
