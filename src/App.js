@@ -45,7 +45,7 @@ export class App extends Component {
 
 		return (
 			<div className="App" data-test="App">
-				<nav>{routes}</nav>
+				{routes}
 				<main>
 					{loading}
 					{error}

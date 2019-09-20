@@ -206,7 +206,7 @@ class Form extends Component {
 			<p>posted</p>
 		) : (
 			<div>
-				<h2>Request info about this product</h2>
+				<h2>Your account</h2>
 				<form>
 					{inputs}
 					<Button clicked={this.onSubmitHandler} disabled={!validForm}>
