@@ -23,7 +23,7 @@ export class App extends Component {
 
 		if (this.props.isAuthenticated) {
 			routes = (
-				<Switch>
+				<nav>
 					<NavLink to="/account" exact>
 						My account
 					</NavLink>
@@ -31,15 +31,15 @@ export class App extends Component {
 						Dossier
 					</NavLink>
 					<button>logout</button>
-				</Switch>
+				</nav>
 			);
 		} else {
 			routes = (
-				<Switch>
+				<nav>
 					<NavLink to="/" exact>
 						Login/register
 					</NavLink>
-				</Switch>
+				</nav>
 			);
 		}
 

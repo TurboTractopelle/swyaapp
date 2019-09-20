@@ -168,6 +168,16 @@ class Form extends Component {
 			<Input
 				data={this.state.form[key]}
 				key={key}
+				type={this.state.form[key].type}
+				counter={this.state.form[key].validation.counter}
+				counterMax={this.state.form[key].validation.counterMax}
+				required={this.state.form[key].validation.required}
+				touched={this.state.form[key].validation.touched}
+				valid={this.state.form[key].validation.valid}
+				value={this.state.form[key].value}
+				title={this.state.form[key].title}
+				placeholder={this.state.form[key].placeholder}
+				special={this.state.form[key].special}
 				onChangeHandler={this.onChangeHandler(this.state.form[key].name)}
 			/>
 		));
