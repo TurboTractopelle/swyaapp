@@ -14,9 +14,10 @@ class Auth extends Component {
 				title: "email",
 				type: "text",
 				value: "",
+				palceholder: "email",
 				validation: {
 					valid: false,
-					required: false,
+					required: true,
 					touched: false
 				}
 			},
@@ -28,7 +29,7 @@ class Auth extends Component {
 				placeholder: "password",
 				validation: {
 					valid: false,
-					required: false,
+					required: true,
 					touched: false,
 					minLength: 6
 				}
@@ -66,7 +67,7 @@ class Auth extends Component {
 					}
 				},
 				formValidation: {
-					valid: checkedFormValidation(prevState.form, id, inputValidationStatus)
+					valid: checkedFormValidation
 				}
 			};
 		});

@@ -5,7 +5,7 @@
  */
 const checkFormValidation = (form, name, status) => {
 	return Object.keys(form).reduce((a, k) => {
-		let inputValidation = this.state.form[k].validation.valid;
+		let inputValidation = form[k].validation.valid;
 		if (k === name) {
 			inputValidation = status;
 		}
