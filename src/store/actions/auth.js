@@ -34,6 +34,7 @@ export const auth = (email, password, isSignUp) => {
 				localStorage.setItem("expirationDate", expirationDate.toString());
 				localStorage.setItem("userId", res.data.localId);
 				console.log("connected");
+				messageRemove(dispatch);
 
 				// store
 				dispatch(authSuccess(res.data.idToken, res.data.localId));
@@ -73,4 +74,11 @@ export const authCheckState = () => {
 			}
 		}
 	};
+};
+
+export const messageRemove = dispatch => {
+	console.log("message remove starting");
+	setTimeout(() => {
+		dispatch(actionCreator(actionTypes.MESSAGE_RESET)());
+	}, 2000);
 };

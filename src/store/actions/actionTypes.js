@@ -9,3 +9,5 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export const LOGOUT = "LOGOUT";
 export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
+
+export const MESSAGE_RESET = "MESSAGE_RESET";

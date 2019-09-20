@@ -50,6 +50,9 @@ const auth = (state = initialState, action) => {
 		case actionTypes.SET_AUTH_REDIRECT_PATH:
 			return { ...state, authRedirectPath: "/dossier" };
 
+		case actionTypes.MESSAGE_RESET:
+			return { ...state, message: {} };
+
 		default:
 			return state;
 	}
