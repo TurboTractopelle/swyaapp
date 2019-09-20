@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Input from "../components/UI/Input/Input";
+import generateInputs from "../utils/generateInputs";
 import Button from "../components/UI/Button/Button";
 import "./Form.scss";
 
@@ -115,7 +115,6 @@ class Form extends Component {
 				out = out && false;
 			}
 		}
-
 		return out;
 	};
 
@@ -163,45 +162,24 @@ class Form extends Component {
 		});
 	};
 
-	generateInputs = () => {
-		return Object.keys(this.state.form).map(key => (
-			<Input
-				data={this.state.form[key]}
-				key={key}
-				type={this.state.form[key].type}
-				counter={this.state.form[key].validation.counter}
-				counterMax={this.state.form[key].validation.counterMax}
-				required={this.state.form[key].validation.required}
-				touched={this.state.form[key].validation.touched}
-				valid={this.state.form[key].validation.valid}
-				value={this.state.form[key].value}
-				title={this.state.form[key].title}
-				placeholder={this.state.form[key].placeholder}
-				special={this.state.form[key].special}
-				onChangeHandler={this.onChangeHandler(this.state.form[key].name)}
-			/>
-		));
-	};
-
 	getFormData = () => {
 		let bodyFormData = new FormData();
 		let keys = Object.keys(this.state.form);
 		for (let i = 0; i < keys.length; i++) {
 			bodyFormData.set(this.state.form[keys[i]].name, this.state.form[keys[i]].value);
-			bodyFormData.set("p_company", this.props.company);
-			bodyFormData.set("p_name", this.props.product);
 		}
 		return bodyFormData;
 	};
 
 	onSubmitHandler = e => {
 		e.preventDefault();
+		//console.log(this.getFormData());
 		console.log(e);
 	};
 
 	render() {
 		const validForm = this.state.formValidation.valid;
-		const inputs = this.generateInputs();
+		const inputs = generateInputs(this.state.form, this.onChangeHandler);
 		const formDisplay = this.state.formSubmission ? (
 			<p>posted</p>
 		) : (
