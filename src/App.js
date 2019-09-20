@@ -18,12 +18,8 @@ export class App extends Component {
 		let routes;
 
 		const loading = this.props.loading && <Spinner />;
-
-		const error = this.props.error && <Message cat="error">{this.props.error}</Message>;
-
-		const connected = this.props.message && <Message cat="success">connected</Message>;
-
-		console.log(this.props.message);
+		const error = this.props.error && <Message msg={this.props.message} />;
+		const connected = this.props.message && <Message msg={this.props.message} />;
 
 		if (this.props.isAuthenticated) {
 			routes = (

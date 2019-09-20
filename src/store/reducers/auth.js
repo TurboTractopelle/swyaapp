@@ -5,7 +5,7 @@ const initialState = {
 	token: null,
 	userId: null,
 	error: null,
-	message: "stuff"
+	message: {}
 };
 
 const auth = (state = initialState, action) => {
@@ -19,17 +19,33 @@ const auth = (state = initialState, action) => {
 				loading: false,
 				token: action.idToken,
 				userId: action.userId,
-				message: "connected"
+				message: { status: "success", body: "You are now connected" }
 			};
 
 		case actionTypes.AUTH_FAIL:
-			return { ...state, loading: false, error: action.error, message: "auth fail" };
+			return {
+				...state,
+				loading: false,
+				error: action.error,
+				message: { status: "danger", body: "Authentication failed" }
+			};
 
 		case actionTypes.AUTH_STOP:
-			return { ...state, error: true, token: null, userId: null, message: "auth stop" };
+			return {
+				...state,
+				error: true,
+				token: null,
+				userId: null,
+				message: { status: "danger", body: "Authentication stopped" }
+			};
 
 		case actionTypes.LOGOUT:
-			return { ...state, token: null, userId: null, message: "logout" };
+			return {
+				...state,
+				token: null,
+				userId: null,
+				message: { status: "success", body: "You have successfully logged out" }
+			};
 
 		case actionTypes.SET_AUTH_REDIRECT_PATH:
 			return { ...state, authRedirectPath: "/dossier" };
