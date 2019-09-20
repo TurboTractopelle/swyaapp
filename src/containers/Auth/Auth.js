@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import Button from "../../components/UI/Button/Button";
-import Input from "../../components/UI/Input2/Input2";
+import Input from "../../components/UI/Input/Input";
 import * as actions from "../../store/actions/auth";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import generateInputs from "../../utils/generateInputs";
 
 class Auth extends Component {
 	state = {
-		controls: {
+		form: {
 			email: {
-				elementType: "email",
-				elementConfig: {
-					type: "text",
-					placeholder: "email"
-				},
+				name: "email",
+				title: "email",
+				type: "text",
 				value: "",
 				validation: {
 					valid: false,
@@ -22,12 +21,11 @@ class Auth extends Component {
 				}
 			},
 			password: {
-				elementType: "input",
-				elementConfig: {
-					type: "text",
-					placeholder: "password"
-				},
+				name: "password",
+				title: "password",
+				type: "text",
 				value: "",
+				placeholder: "password",
 				validation: {
 					valid: false,
 					required: false,
@@ -35,6 +33,9 @@ class Auth extends Component {
 					minLength: 6
 				}
 			}
+		},
+		formValidation: {
+			valid: false
 		},
 		isSignUp: true // affiche la creation de compte par défault
 	};
@@ -49,19 +50,19 @@ class Auth extends Component {
 		this.setState(prevState => {
 			return {
 				...prevState,
-				controls: {
-					...prevState.controls,
+				form: {
+					...prevState.form,
 					[id]: {
-						...prevState.controls[id],
+						...prevState.form[id],
 						validation: {
-							...prevState.controls[id].validation,
+							...prevState.form[id].validation,
 							touched: true,
-							valid: this.checkValidity(value, prevState.controls[id].validation)
+							valid: this.checkValidity(value, prevState.form[id].validation)
 						},
 						value
 					}
 				},
-				formIsValid: this.checkFormValidity(prevState.controls)
+				formIsValid: this.checkFormValidity(prevState.form)
 			};
 		});
 	};
@@ -95,25 +96,12 @@ class Auth extends Component {
 
 	submitHandler = e => {
 		e.preventDefault();
-		const { controls } = this.state;
-		this.props.auth(controls.email.value, controls.password.value, this.state.isSignUp);
+		const { form } = this.state;
+		this.props.auth(form.email.value, form.password.value, this.state.isSignUp);
 	};
 
 	render() {
-		const form = Object.entries(this.state.controls).map((input, i) => {
-			const id = input[0];
-
-			return (
-				<Input
-					inputtype={input[1].elementType}
-					elementConfig={input[1].elementConfig}
-					pvalue={input[1].value}
-					changed={this.inputChangeHandler(id)}
-					valid={input[1].validation.valid}
-					key={id}
-				/>
-			);
-		});
+		const inputs = generateInputs(this.state.form, this.inputChangeHandler);
 
 		let redirect = null;
 		if (this.props.isAuthenticated) {
@@ -128,7 +116,7 @@ class Auth extends Component {
 				{redirect}
 
 				<form onSubmit={this.submitHandler}>
-					{form}
+					{inputs}
 					<Button btnType="Success">SUBMIT</Button>
 				</form>
 				<Button btnType="Danger" clicked={this.switchAuthModeHandler}>
