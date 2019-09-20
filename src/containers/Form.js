@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../components/UI/Input/Input";
-import Submitbtn from "../components/UI/Button/Button";
+import Button from "../components/UI/Button/Button";
 import "./Form.scss";
 
 class Form extends Component {
@@ -199,7 +199,9 @@ class Form extends Component {
 				<h2>Request info about this product</h2>
 				<form>
 					{inputs}
-					<Submitbtn validForm={validForm} onSubmitHandler={this.onSubmitHandler} />
+					<Button clicked={this.onSubmitHandler} disabled={!validForm}>
+						Submit
+					</Button>
 				</form>
 			</div>
 		);

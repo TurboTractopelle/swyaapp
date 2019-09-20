@@ -1,12 +1,11 @@
 import React from "react";
 
-const Button = props => {
-	const disabled = !props.validForm;
+const Button2 = props => {
 	return (
-		<button disabled={disabled} data-test="Button" onClick={props.onSubmitHandler} type="button">
-			Submit
+		<button disabled={props.disabled} onClick={props.clicked}>
+			{props.children}
 		</button>
 	);
 };
 
-export default Button;
+export default Button2;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "../../components/UI/Button2/Button2";
+import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input2/Input2";
 import * as actions from "../../store/actions/auth";
 import { connect } from "react-redux";
