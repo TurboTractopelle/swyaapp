@@ -33,6 +33,7 @@ export const auth = (email, password, isSignUp) => {
 				localStorage.setItem("token", res.data.idToken);
 				localStorage.setItem("expirationDate", expirationDate.toString());
 				localStorage.setItem("userId", res.data.localId);
+				console.log("connected");
 
 				// store
 				dispatch(authSuccess(res.data.idToken, res.data.localId));

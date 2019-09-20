@@ -19,7 +19,11 @@ export class App extends Component {
 
 		const loading = this.props.loading && <Spinner />;
 
-		const error = this.props.error && <Message cat="error" body={this.props.error.body} />;
+		const error = this.props.error && <Message cat="error">{this.props.error}</Message>;
+
+		const connected = this.props.message && <Message cat="success">connected</Message>;
+
+		console.log(this.props.message);
 
 		if (this.props.isAuthenticated) {
 			routes = (
@@ -30,7 +34,7 @@ export class App extends Component {
 					<NavLink to="/b" exact>
 						Dossier
 					</NavLink>
-					<button>logout</button>
+					<button onClick={() => this.props.logout()}>logout</button>
 				</nav>
 			);
 		} else {
@@ -49,6 +53,7 @@ export class App extends Component {
 				<main>
 					{loading}
 					{error}
+					{connected}
 					<Switch>
 						<Route exact path="/" component={Auth} />
 						<Route exact path="/account" component={Form} />
@@ -64,13 +69,15 @@ const mapStateToProps = state => {
 	return {
 		isAuthenticated: state.auth.token !== null,
 		loading: state.auth.loading,
-		error: state.auth.error
+		error: state.auth.error,
+		message: state.auth.message
 	};
 };
 
 const dispatchToProps = dispatch => {
 	return {
-		authCheckState: () => dispatch(actions.authCheckState())
+		authCheckState: () => dispatch(actions.authCheckState()),
+		logout: () => dispatch(actions.logout())
 	};
 };
 

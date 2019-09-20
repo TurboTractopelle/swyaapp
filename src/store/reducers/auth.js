@@ -4,7 +4,8 @@ const initialState = {
 	loading: false,
 	token: null,
 	userId: null,
-	error: null
+	error: null,
+	message: "stuff"
 };
 
 const auth = (state = initialState, action) => {
@@ -13,22 +14,22 @@ const auth = (state = initialState, action) => {
 			return { ...state, loading: true };
 
 		case actionTypes.AUTH_SUCCESS:
-			console.log(action);
 			return {
 				...state,
 				loading: false,
 				token: action.idToken,
-				userId: action.userId
+				userId: action.userId,
+				message: "connected"
 			};
 
 		case actionTypes.AUTH_FAIL:
-			return { ...state, loading: false, error: action.error };
+			return { ...state, loading: false, error: action.error, message: "auth fail" };
 
 		case actionTypes.AUTH_STOP:
-			return { ...state, error: true, token: null, userId: null };
+			return { ...state, error: true, token: null, userId: null, message: "auth stop" };
 
 		case actionTypes.LOGOUT:
-			return { ...state, token: null, userId: null };
+			return { ...state, token: null, userId: null, message: "logout" };
 
 		case actionTypes.SET_AUTH_REDIRECT_PATH:
 			return { ...state, authRedirectPath: "/dossier" };
